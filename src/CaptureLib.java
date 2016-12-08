@@ -34,7 +34,8 @@ public class CaptureLib {
     // private static CloseableHttpClient httpClient = HttpClients.createDefault();
     static int actiCount = 0;
     static int totalCount = 0;
-    static int countToIgnor = 0;
+    static int countToIgnor = 214;
+    // static int countToIgnor = 0;
     static int passwdChange = 0;
     static final int TIMEOUT_MILLIS = 8000;
     static RequestConfig requestConfig = RequestConfig.custom()
@@ -76,8 +77,8 @@ public class CaptureLib {
         Map<String, String> stuList = LoadData.getStuList();
         String stuName = "";
         String stuId = "";
-        // for (Map.Entry<String, String> entry : stuList.entrySet()) {
-        for (int i=0; i<1; i++){
+        for (Map.Entry<String, String> entry : stuList.entrySet()) {
+        // for (int i=0; i<1; i++){
             totalCount++;
             // 跳过一定数目的数据
             if (totalCount < countToIgnor) {
@@ -86,13 +87,22 @@ public class CaptureLib {
             }
             System.out.println("这是第" + totalCount + "个");
 
-            // stuName = entry.getKey();
-            // stuId = entry.getValue();
-            stuId = "15104400";
-            stuName = "汪盼盼";
+//             stuId = "14104503";
+//             stuName = "张潇雅";
+
+            stuName = entry.getKey();
+            stuId = entry.getValue();
+
+            String temp;
+            if (stuId.length() != 8) {
+                temp = stuName;
+                stuName = stuId;
+                stuId = temp;
+            }
+
             System.out.println("开始获取名字为" + stuName + "，学号为" + stuId + "的用户的数据...");
             nvpsLogin.add(new BasicNameValuePair("number", stuId));
-
+            // 每次都使用一个新的httpClient示例发送请求。
             CloseableHttpClient httpClient = HttpClients.createDefault();
 
             try {
@@ -176,7 +186,6 @@ public class CaptureLib {
             logout.setHeader("Rerferer", "http://opac.ahau.edu.cn/reader/redr_info.php");
             CloseableHttpResponse response  = httpClient.execute(logout);
             HttpEntity entity = response.getEntity();
-            System.out.println(entity);
 
         } catch (ConnectionPoolTimeoutException e) {
             System.out.println("获取用户" + stuName + "(学号" + stuId + ")数据超时，获取下一个用户的数据...");
@@ -192,8 +201,6 @@ public class CaptureLib {
         String inforUrl = "http://opac.ahau.edu.cn/reader/redr_info_rule.php";
         HttpGet infoGet = new HttpGet(inforUrl);
         infoGet.setConfig(requestConfig);
-
-        System.out.println("Get information post line: " + infoGet.getRequestLine());
         // 执行Get请求获取详细个人信息
         CloseableHttpResponse infoGetResponse = httpClient.execute(infoGet);
         // 获取得到的个人详细信息

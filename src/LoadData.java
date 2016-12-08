@@ -17,7 +17,7 @@ public class LoadData {
         ArrayList stuList = new ArrayList();
         try {
             String line;
-            String pathname = "数据//14级转专业.txt";
+            String pathname = "数据//15级可以报四级.txt";
             File file = new File(pathname);
             Scanner scanner = new Scanner(file);
             String[] namePair = {};

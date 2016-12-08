@@ -12,7 +12,6 @@ import org.jsoup.select.Elements;
 
 import java.io.*;
 import java.sql.*;
-import java.sql.Date;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -88,7 +87,7 @@ public class TestParse {
         }
 
         System.out.println("开始解析每本书并存储...");
-        int i=0;
+        int i = 0;
         for (Elements book : allBooks) {
             i++;
             bookId = book.get(1).text();
@@ -96,7 +95,7 @@ public class TestParse {
             bookUri = book.get(2).childNode(0).attr("href");
             bookUri = bookUri.substring(2, bookUri.length());
             bookUrl = baseUri + bookUri;
-            System.out.println("获取第" + i + "本书的额外信息...");
+            System.out.println("获取历史借阅中第" + i + "本书的额外信息...");
             moreBookInfo = parsBookInfo(bookUrl);
             isbn = moreBookInfo.get("isbn");
             whereNum = moreBookInfo.get("whereNum");
@@ -167,7 +166,7 @@ public class TestParse {
             document = Jsoup.parse(infoContent);
             elements = document.getElementsByClass("booklist");
             String bookType = null;
-            String whereNum=null;
+            String whereNum = null;
             for (Element element : elements) {
                 Elements elements1 = element.getElementsContainingText("学科主题");
                 Elements elements3 = element.getElementsContainingText("个人名称主题");
@@ -211,7 +210,8 @@ public class TestParse {
                 .childNode(1)
                 .toString()
                 .split("册")[0]);
-        String department = blueText.get(14).parent().childNode(1).toString();
+        // String department = blueText.get(14).parent().childNode(1).toString();
+        String department = blueText.get(17).parent().childNode(1).toString();
         // 职业/职称/大学专业
         String major = blueText.get(18).parent().childNode(1).toString();
         String sex = blueText.get(20).parent().childNode(1).toString();
@@ -237,53 +237,61 @@ public class TestParse {
 
     public static void parsRecent(String stuID, Connection conn, String content) {
         System.out.println("开始解析最近借阅数据...");
-        try {
-            Document document = Jsoup.parse(content);
 
-            // 解析借阅的书名，作者，借书,还书时间和馆藏地址
-            Elements whiteText = document.getElementsByClass("whitetext");
-            String bookTitle = null;
-            String bookId = null;
-            String authorName = null;
-            java.util.Date borrowDate = null;
-            java.util.Date returnDate = null;
-            String storeArea = null;
-            String tempName = null;
-            String bookUri = null;
-            String bookUrl = null;
-            String baseUri = "http://opac.ahau.edu.cn";
-            HashMap<String, String> moreBookInfo = new HashMap<>();
-            DateFormat dateFmt = new SimpleDateFormat("yyyy-MM-dd");
-            int k = 0;
-            String bookType = null;
-            String isbn = null;
-            String whereNum = null;
-            ArrayList<Elements> allBooks = new ArrayList<>();
-            Elements eachBook = new Elements();
+        Document document = Jsoup.parse(content);
 
-            for (Element element : whiteText) {
-                eachBook.add(element);
-                k++;
-                if (k == 8) {
-                    allBooks.add(eachBook);
-                    eachBook = new Elements();
-                    k = 0;
-                }
+        // 解析借阅的书名，作者，借书,还书时间和馆藏地址
+        Elements whiteText = document.getElementsByClass("whitetext");
+        String bookTitle = null;
+        String bookId = null;
+        String authorName = null;
+        java.util.Date borrowDate = null;
+        java.util.Date returnDate = null;
+        String storeArea = null;
+        String tempName = null;
+        String bookUri = null;
+        String bookUrl = null;
+        String baseUri = "http://opac.ahau.edu.cn";
+        HashMap<String, String> moreBookInfo = new HashMap<>();
+        DateFormat dateFmt = new SimpleDateFormat("yyyy-MM-dd");
+        int k = 0;
+        String bookType = null;
+        String isbn = null;
+        String whereNum = null;
+        ArrayList<Elements> allBooks = new ArrayList<>();
+        Elements eachBook = new Elements();
+
+        for (Element element : whiteText) {
+            eachBook.add(element);
+            k++;
+            if (k == 8) {
+                allBooks.add(eachBook);
+                eachBook = new Elements();
+                k = 0;
             }
+        }
 
-            for (Elements book : allBooks) {
+        int i = 0;
+        for (Elements book : allBooks) {
+            try {
+                i++;
                 bookId = book.get(0).text();
                 bookTitle = book.get(1).text().split("/")[0];
                 bookUri = book.get(1).childNode(0).attr("href");
                 bookUri = bookUri.substring(2, bookUri.length());
                 bookUrl = baseUri + bookUri;
+                System.out.println("获取最近借阅中第" + i + "本书的额外信息...");
                 moreBookInfo = parsBookInfo(bookUrl);
                 isbn = moreBookInfo.get("isbn");
                 whereNum = moreBookInfo.get("whereNum");
                 bookType = moreBookInfo.get("bookType");
-                authorName = book.get(1)
-                        .text()
-                        .split("/")[1];
+
+                String[] temp = book.get(1).text().split("/");
+                if (temp.length < 2){
+                    authorName = "佚名";
+                } else {
+                    authorName = temp[1];
+                }
                 storeArea = book.get(5).text();
                 String sqlInsert = "INSERT INTO books(book_id, book_title, book_author, store_area, isbn, where_num, book_type) " +
                         "VALUES(?, ?, ?, ?, ?, ?, ?) ON DUPLICATE KEY UPDATE borrowed_count=borrowed_count+1";
@@ -312,11 +320,14 @@ public class TestParse {
                 preparedStmt.setDate(3, sqlBorrowDate);
                 preparedStmt.setDate(4, sqlReturnDate);
                 result = preparedStmt.executeUpdate();
+            } catch (SQLException e) {
+                e.printStackTrace();
+                System.out.println("书籍解析出错，跳过进行下一本");
+                continue;
+            } catch (ParseException e) {
+                e.printStackTrace();
             }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        } catch (ParseException e) {
-            e.printStackTrace();
         }
+
     }
 }

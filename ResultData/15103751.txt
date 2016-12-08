@@ -1,0 +1,525 @@
+
+
+#######################    HistContent    #####################
+
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <title>安徽农业大学图书馆v5.5书目检索系统 </title>
+<link type="text/css" rel="stylesheet" href="../tpl/css/style.css">
+<link type="text/css" rel="stylesheet" href="../tpl/css/mylib.css" />
+<link type="text/css" rel="stylesheet" href="../tpl/css/ui-lightness/jquery-ui-1.8.13.custom.css">
+<link type="text/css" rel="stylesheet" href="../tpl/css/font-awesome.css">
+<link type="text/css" rel="stylesheet" href="../tpl/css/bootstrap.css">
+<link type="text/css" rel="stylesheet" href="../tpl/css/reader-info.css">
+<script  type="text/javascript" src="../tpl/js/jquery.1.7.1.min.js"></script>
+<script  type="text/javascript" src="../tpl/js/jquery-ui-1.8.13.custom.min.js"></script>
+<script  type="text/javascript" src="../tpl/js/highlighter.js"></script>
+
+<script type="text/javascript" src="../tpl/js/raphael.2.1.0.min.js"></script>
+<script type="text/javascript" src="../tpl/js/justgage.js"></script>
+
+</head>
+<body>
+<div id="header_opac">
+	<h1 class="header_opac_img">
+    <div class="header_opac_logo">
+    	安徽农业大学图书馆书目检索系统<br>
+        <p>Online Public Access Catalogue</p>
+        
+    </div>
+    </h1>
+    <div class="header_right header_right_top">
+      <p class="header_right_font">       </p>
+      <p style="margin-top:60px;" class="header_right_font">
+        <a href="../opac/book_cart.php">暂存书架(<span id="bookcartCount">0</span>)</a> | <font color="blue">李彬琪</font> <strong><a href="../reader/logout.php" style="color:#ff0000;">注销</a></strong></p>
+       </div>
+</div>
+<div id="menubar">
+    <ul id="menu_top">
+    		  	<li><a href="../opac/search.php" target="_self" >书目检索</a></li>
+	  		  	<li><a href="../top/top_lend.php" target="_self" >热门推荐</a></li>
+	  		  	<li><a href="../browse/cls_browsing.php" target="_self" >分类浏览</a></li>
+	  		  	<li><a href="../newbook/newbook_cls_browse.php" target="_self" >新书通报</a></li>
+	  		  	<li><a href="../peri/peri_nav_e.php" target="_self" >期刊导航</a></li>
+	  		  	<li><a href="../asord/asord_hist.php" target="_self" >读者荐购</a></li>
+	  		  	<li><a href="../shelf/curriculum_browse.php" target="_self" >学科参考</a></li>
+	  		  	<li><a href="../info/info_guide.php" target="_self" >信息发布</a></li>
+	  		  	<li><a class="menu_top_on" style="color:#6C5B23;"	href="../reader/redr_info.php" target="_self" >我的图书馆</a></li>
+	  		  	         <div class="clear"></div>
+    </ul>
+</div>
+<div id="submenu">
+	        <div class="clear"></div>
+</div>
+
+		<div id="mainbox">
+   <div id="container">
+  <div id="navsidebar">
+     <ul id="nav_mylib">
+     	<li><a href="redr_info.php" >我的首页</a></li><li><a href="redr_info_rule.php" >证件信息</a></li><li><a href="book_lst.php" >当前借阅</a></li><li id="nav_mylibhome"><a href="book_hist.php" >借阅历史</a></li><li><a href="asord_lst.php" >荐购历史</a></li><li><a href="preg.php" >预约信息</a></li><li><a href="relegate.php" >委托信息</a></li><li><a href="book_shelf.php" >我的书架</a></li><li><a href="book_loss.php" >书刊遗失</a></li><li><a href="redr_lost.php" >读者挂失</a></li><li><a href="account.php" >帐目清单</a></li><li><a href="fine_pec.php" >违章缴款</a></li><li><a href="book_rv.php" >我的书评</a></li><li><a href="search_hist.php" >检索历史</a></li><li><a href="reader_curriculum.php" >我的课程</a></li><li><a href="credit_detail.php" >我的积分</a></li>
+     </ul>
+  </div>
+  
+  <div id="mylib_content">
+  		<h2>借阅历史</h2>
+      			
+      <form action="" method="post" name="frm_hist" id="f">
+      	<p style=" margin:10px auto;"><INPUT TYPE="radio" NAME="para_string" value="all" onclick="frm_hist.submit();" checked>显示全部
+			<INPUT TYPE="radio" NAME="para_string" value="page"  onclick="frm_hist.submit();" >分页显示
+       		&nbsp;&nbsp;&nbsp;</p>
+     </form>  
+			<table width="100%" border="0" cellpadding="5" cellspacing="1" bgcolor="#CCCCCC" class="table_line">
+				<tr>
+					<td bgcolor="#d8d8d8" class="greytext"></td> 
+					<td bgcolor="#d8d8d8" class="greytext">条码号</td>
+					<td bgcolor="#d8d8d8" class="greytext">题名</td>
+					<td bgcolor="#d8d8d8" class="greytext">责任者</td>
+					<td bgcolor="#d8d8d8" class="greytext">借阅日期</td>
+					<td bgcolor="#d8d8d8" class="greytext">归还日期</td>
+					<td bgcolor="#d8d8d8" class="greytext">馆藏地</td>
+				</tr>
+				<tr>
+					<td bgcolor="#FFFFFF" class="whitetext"  width="5%">1</td>
+					<td bgcolor="#FFFFFF" class="whitetext" width="10%">B1149330</td>
+					<td bgcolor="#FFFFFF" class="whitetext" width="25%"><a class="blue" href="../opac/item.php?marc_no=0000200215">&#x5343;&#x5e74;&#x4e00;&#x53f9;</a></td>
+					<td bgcolor="#FFFFFF" class="whitetext" width="15%">&#x4f59;&#x79cb;&#x96e8;&#x005b;&#x8457;&#x005d;</td>
+					<td bgcolor="#FFFFFF" class="whitetext" width="12%">2016-11-19</td>
+					<td bgcolor="#FFFFFF" class="whitetext" width="12%">2016-11-19</td>
+					<td bgcolor="#FFFFFF" class="whitetext" width="15%">四楼书库</td>
+				</tr>
+				<tr>
+					<td bgcolor="#FFFFFF" class="whitetext"  width="5%">2</td>
+					<td bgcolor="#FFFFFF" class="whitetext" width="10%">B0541701</td>
+					<td bgcolor="#FFFFFF" class="whitetext" width="25%"><a class="blue" href="../opac/item.php?marc_no=0000073577">&#x9ea6;&#x7530;&#x91cc;&#x7684;&#x5b88;&#x671b;&#x8005;</a></td>
+					<td bgcolor="#FFFFFF" class="whitetext" width="15%">&#x0028;&#x7f8e;&#x0029;&#x585e;&#x6797;&#x683c;&#x0028;&#x0053;&#x0061;&#x006c;&#x0069;&#x006e;&#x0067;&#x0065;&#x0072;&#x002c;&#x004a;&#x002e;&#x0044;&#x002e;&#x0029;&#x0020;&#x8457;</td>
+					<td bgcolor="#FFFFFF" class="whitetext" width="12%">2016-10-15</td>
+					<td bgcolor="#FFFFFF" class="whitetext" width="12%">2016-11-11</td>
+					<td bgcolor="#FFFFFF" class="whitetext" width="15%">四楼书库</td>
+				</tr>
+				<tr>
+					<td bgcolor="#FFFFFF" class="whitetext"  width="5%">3</td>
+					<td bgcolor="#FFFFFF" class="whitetext" width="10%">B0896339</td>
+					<td bgcolor="#FFFFFF" class="whitetext" width="25%"><a class="blue" href="../opac/item.php?marc_no=0000136401">&#x660e;&#x6e05;&#x5341;&#x5927;&#x5947;&#x6848;</a></td>
+					<td bgcolor="#FFFFFF" class="whitetext" width="15%">&#x5218;&#x5efa;&#x4e1a;&#x8457;</td>
+					<td bgcolor="#FFFFFF" class="whitetext" width="12%">2016-10-15</td>
+					<td bgcolor="#FFFFFF" class="whitetext" width="12%">2016-11-05</td>
+					<td bgcolor="#FFFFFF" class="whitetext" width="15%">四楼书库</td>
+				</tr>
+				<tr>
+					<td bgcolor="#FFFFFF" class="whitetext"  width="5%">4</td>
+					<td bgcolor="#FFFFFF" class="whitetext" width="10%">B0917295</td>
+					<td bgcolor="#FFFFFF" class="whitetext" width="25%"><a class="blue" href="../opac/item.php?marc_no=0000195982">&#x8c01;&#x7684;&#x9752;&#x6625;&#x4e0d;&#x8ff7;&#x832b;</a></td>
+					<td bgcolor="#FFFFFF" class="whitetext" width="15%">&#x5218;&#x540c;&#x8457;</td>
+					<td bgcolor="#FFFFFF" class="whitetext" width="12%">2016-09-24</td>
+					<td bgcolor="#FFFFFF" class="whitetext" width="12%">2016-11-18</td>
+					<td bgcolor="#FFFFFF" class="whitetext" width="15%">四楼书库</td>
+				</tr>
+				<tr>
+					<td bgcolor="#FFFFFF" class="whitetext"  width="5%">5</td>
+					<td bgcolor="#FFFFFF" class="whitetext" width="10%">B1187227</td>
+					<td bgcolor="#FFFFFF" class="whitetext" width="25%"><a class="blue" href="../opac/item.php?marc_no=0000217085">&#x5df4;&#x9ece;&#x002c;&#x0020;&#x5f88;&#x70e6;&#x4eba;</a></td>
+					<td bgcolor="#FFFFFF" class="whitetext" width="15%">&#x6bd5;&#x8fdc;&#x6708;&#x8457;</td>
+					<td bgcolor="#FFFFFF" class="whitetext" width="12%">2016-09-17</td>
+					<td bgcolor="#FFFFFF" class="whitetext" width="12%">2016-11-18</td>
+					<td bgcolor="#FFFFFF" class="whitetext" width="15%">四楼书库</td>
+				</tr>
+				<tr>
+					<td bgcolor="#FFFFFF" class="whitetext"  width="5%">6</td>
+					<td bgcolor="#FFFFFF" class="whitetext" width="10%">B1149330</td>
+					<td bgcolor="#FFFFFF" class="whitetext" width="25%"><a class="blue" href="../opac/item.php?marc_no=0000200215">&#x5343;&#x5e74;&#x4e00;&#x53f9;</a></td>
+					<td bgcolor="#FFFFFF" class="whitetext" width="15%">&#x4f59;&#x79cb;&#x96e8;&#x005b;&#x8457;&#x005d;</td>
+					<td bgcolor="#FFFFFF" class="whitetext" width="12%">2016-09-17</td>
+					<td bgcolor="#FFFFFF" class="whitetext" width="12%">2016-11-19</td>
+					<td bgcolor="#FFFFFF" class="whitetext" width="15%">四楼书库</td>
+				</tr>
+				<tr>
+					<td bgcolor="#FFFFFF" class="whitetext"  width="5%">7</td>
+					<td bgcolor="#FFFFFF" class="whitetext" width="10%">B1300965</td>
+					<td bgcolor="#FFFFFF" class="whitetext" width="25%"><a class="blue" href="../opac/item.php?marc_no=0000231750">&#x5984;&#x60f3;&#x4ee3;&#x7406;</a></td>
+					<td bgcolor="#FFFFFF" class="whitetext" width="15%">&#x0028;&#x65e5;&#x0029;&#x897f;&#x6cfd;&#x4fdd;&#x5f66;&#x8457;</td>
+					<td bgcolor="#FFFFFF" class="whitetext" width="12%">2016-09-17</td>
+					<td bgcolor="#FFFFFF" class="whitetext" width="12%">2016-10-15</td>
+					<td bgcolor="#FFFFFF" class="whitetext" width="15%">四楼书库</td>
+				</tr>
+				<tr>
+					<td bgcolor="#FFFFFF" class="whitetext"  width="5%">8</td>
+					<td bgcolor="#FFFFFF" class="whitetext" width="10%">B1309082</td>
+					<td bgcolor="#FFFFFF" class="whitetext" width="25%"><a class="blue" href="../opac/item.php?marc_no=0000227629">&#x9752;&#x7530;&#x8857;&#x4e03;&#x5df7;&#x516d;&#x53f7;</a></td>
+					<td bgcolor="#FFFFFF" class="whitetext" width="15%">&#x4eae;&#x8f69;&#x8457;</td>
+					<td bgcolor="#FFFFFF" class="whitetext" width="12%">2016-05-18</td>
+					<td bgcolor="#FFFFFF" class="whitetext" width="12%">2016-07-03</td>
+					<td bgcolor="#FFFFFF" class="whitetext" width="15%">四楼书库</td>
+				</tr>
+				<tr>
+					<td bgcolor="#FFFFFF" class="whitetext"  width="5%">9</td>
+					<td bgcolor="#FFFFFF" class="whitetext" width="10%">B1309082</td>
+					<td bgcolor="#FFFFFF" class="whitetext" width="25%"><a class="blue" href="../opac/item.php?marc_no=0000227629">&#x9752;&#x7530;&#x8857;&#x4e03;&#x5df7;&#x516d;&#x53f7;</a></td>
+					<td bgcolor="#FFFFFF" class="whitetext" width="15%">&#x4eae;&#x8f69;&#x8457;</td>
+					<td bgcolor="#FFFFFF" class="whitetext" width="12%">2016-03-13</td>
+					<td bgcolor="#FFFFFF" class="whitetext" width="12%">2016-05-18</td>
+					<td bgcolor="#FFFFFF" class="whitetext" width="15%">四楼书库</td>
+				</tr>
+				<tr>
+					<td bgcolor="#FFFFFF" class="whitetext"  width="5%">10</td>
+					<td bgcolor="#FFFFFF" class="whitetext" width="10%">B0916062</td>
+					<td bgcolor="#FFFFFF" class="whitetext" width="25%"><a class="blue" href="../opac/item.php?marc_no=0000180408">&#x4e34;&#x754c;&#x00b7;&#x7235;&#x8ff9;&#x002e;&#x2160;</a></td>
+					<td bgcolor="#FFFFFF" class="whitetext" width="15%">&#x90ed;&#x656c;&#x660e;&#x8457;</td>
+					<td bgcolor="#FFFFFF" class="whitetext" width="12%">2016-03-13</td>
+					<td bgcolor="#FFFFFF" class="whitetext" width="12%">2016-05-18</td>
+					<td bgcolor="#FFFFFF" class="whitetext" width="15%">四楼书库</td>
+				</tr>
+				<tr>
+					<td bgcolor="#FFFFFF" class="whitetext"  width="5%">11</td>
+					<td bgcolor="#FFFFFF" class="whitetext" width="10%">B1180137</td>
+					<td bgcolor="#FFFFFF" class="whitetext" width="25%"><a class="blue" href="../opac/item.php?marc_no=0000212311">&#x8bb8;&#x6cd7;&#x7684;&#x68a6;&#x5e7b;&#x4eba;&#x751f;</a></td>
+					<td bgcolor="#FFFFFF" class="whitetext" width="15%">&#x76f8;&#x88d5;&#x4ead;&#x8457;</td>
+					<td bgcolor="#FFFFFF" class="whitetext" width="12%">2016-03-13</td>
+					<td bgcolor="#FFFFFF" class="whitetext" width="12%">2016-05-18</td>
+					<td bgcolor="#FFFFFF" class="whitetext" width="15%">四楼书库</td>
+				</tr>
+				<tr>
+					<td bgcolor="#FFFFFF" class="whitetext"  width="5%">12</td>
+					<td bgcolor="#FFFFFF" class="whitetext" width="10%">B1100412</td>
+					<td bgcolor="#FFFFFF" class="whitetext" width="25%"><a class="blue" href="../opac/item.php?marc_no=0000187582">&#x638c;&#x63e1;&#x60c5;&#x7eea;&#x003a;&#x0020;&#x4f60;&#x53ef;&#x4ee5;&#x4e0d;&#x751f;&#x6c14;&#x003a;&#x8ba9;&#x4f60;&#x5feb;&#x4e50;&#x6bcf;&#x4e00;&#x5929;&#x7684;&#x5fc3;&#x7406;&#x5b66;&#x667a;&#x6167;</a></td>
+					<td bgcolor="#FFFFFF" class="whitetext" width="15%">&#x987e;&#x5efa;&#x519b;&#x7f16;&#x8457;</td>
+					<td bgcolor="#FFFFFF" class="whitetext" width="12%">2016-01-13</td>
+					<td bgcolor="#FFFFFF" class="whitetext" width="12%">2016-02-29</td>
+					<td bgcolor="#FFFFFF" class="whitetext" width="15%">五楼书库</td>
+				</tr>
+				<tr>
+					<td bgcolor="#FFFFFF" class="whitetext"  width="5%">13</td>
+					<td bgcolor="#FFFFFF" class="whitetext" width="10%">B0757742</td>
+					<td bgcolor="#FFFFFF" class="whitetext" width="25%"><a class="blue" href="../opac/item.php?marc_no=0000107654">&#x5e7f;&#x544a;&#x8bbe;&#x8ba1;&#x5b66;&#x003a;&#x5e94;&#x7528;&#x7bc7;</a></td>
+					<td bgcolor="#FFFFFF" class="whitetext" width="15%">&#x66f9;&#x9091;&#x0020;&#x7f16;&#x8457;</td>
+					<td bgcolor="#FFFFFF" class="whitetext" width="12%">2016-01-07</td>
+					<td bgcolor="#FFFFFF" class="whitetext" width="12%">2016-02-29</td>
+					<td bgcolor="#FFFFFF" class="whitetext" width="15%">四楼书库</td>
+				</tr>
+				<tr>
+					<td bgcolor="#FFFFFF" class="whitetext"  width="5%">14</td>
+					<td bgcolor="#FFFFFF" class="whitetext" width="10%">B0757152</td>
+					<td bgcolor="#FFFFFF" class="whitetext" width="25%"><a class="blue" href="../opac/item.php?marc_no=0000111339">&#x5e7f;&#x544a;&#x8bbe;&#x8ba1;&#x5b66;&#x002c;&#x57fa;&#x7840;&#x7bc7;</a></td>
+					<td bgcolor="#FFFFFF" class="whitetext" width="15%">&#x9ec4;&#x6d77;&#x8363;&#x7f16;&#x8457;</td>
+					<td bgcolor="#FFFFFF" class="whitetext" width="12%">2016-01-07</td>
+					<td bgcolor="#FFFFFF" class="whitetext" width="12%">2016-02-29</td>
+					<td bgcolor="#FFFFFF" class="whitetext" width="15%">四楼书库</td>
+				</tr>
+				<tr>
+					<td bgcolor="#FFFFFF" class="whitetext"  width="5%">15</td>
+					<td bgcolor="#FFFFFF" class="whitetext" width="10%">B1099000</td>
+					<td bgcolor="#FFFFFF" class="whitetext" width="25%"><a class="blue" href="../opac/item.php?marc_no=0000186289">&#x7f8e;&#x6587;&#x9986;&#x002e;&#x005b;&#x0035;&#x005d;&#x002c;&#x518d;&#x522b;&#x5eb7;&#x6865;</a></td>
+					<td bgcolor="#FFFFFF" class="whitetext" width="15%">&#x5f90;&#x5fd7;&#x6469;&#x8457;</td>
+					<td bgcolor="#FFFFFF" class="whitetext" width="12%">2015-11-13</td>
+					<td bgcolor="#FFFFFF" class="whitetext" width="12%">2015-12-24</td>
+					<td bgcolor="#FFFFFF" class="whitetext" width="15%">四楼书库</td>
+				</tr>
+				<tr>
+					<td bgcolor="#FFFFFF" class="whitetext"  width="5%">16</td>
+					<td bgcolor="#FFFFFF" class="whitetext" width="10%">B1197899</td>
+					<td bgcolor="#FFFFFF" class="whitetext" width="25%"><a class="blue" href="../opac/item.php?marc_no=0000196078">&#x6708;&#x6726;&#x80e7;&#xff0c;&#x9e1f;&#x6726;&#x80e7;&#x003a;&#x4e16;&#x95f4;&#x6700;&#x7f8e;&#x7684;&#x76f8;&#x9047;</a></td>
+					<td bgcolor="#FFFFFF" class="whitetext" width="15%">&#x6234;&#x671b;&#x8212;&#x8457;</td>
+					<td bgcolor="#FFFFFF" class="whitetext" width="12%">2015-11-13</td>
+					<td bgcolor="#FFFFFF" class="whitetext" width="12%">2015-12-24</td>
+					<td bgcolor="#FFFFFF" class="whitetext" width="15%">四楼书库</td>
+				</tr>
+			</table>
+  </div>
+  
+  <div class="clear"></div>
+  
+</div><div id="footer"><div id="copy"><p> 安徽农业大学图书馆&nbsp;&nbsp; OPAC v5.5.15.08.27  &nbsp;&nbsp;</p><p>&copy; 1999-2015 <a target="_blank" href="http://www.libsys.com.cn">Jiangsu Huiwen Software Ltd. 江苏汇文软件有限公司</a></p></div></div></body></html>
+
+#######################    UserInfo    #####################
+
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <title>安徽农业大学图书馆v5.5书目检索系统 </title>
+<link type="text/css" rel="stylesheet" href="../tpl/css/style.css">
+<link type="text/css" rel="stylesheet" href="../tpl/css/mylib.css" />
+<link type="text/css" rel="stylesheet" href="../tpl/css/ui-lightness/jquery-ui-1.8.13.custom.css">
+<link type="text/css" rel="stylesheet" href="../tpl/css/font-awesome.css">
+<link type="text/css" rel="stylesheet" href="../tpl/css/bootstrap.css">
+<link type="text/css" rel="stylesheet" href="../tpl/css/reader-info.css">
+<script  type="text/javascript" src="../tpl/js/jquery.1.7.1.min.js"></script>
+<script  type="text/javascript" src="../tpl/js/jquery-ui-1.8.13.custom.min.js"></script>
+<script  type="text/javascript" src="../tpl/js/highlighter.js"></script>
+
+<script type="text/javascript" src="../tpl/js/raphael.2.1.0.min.js"></script>
+<script type="text/javascript" src="../tpl/js/justgage.js"></script>
+
+</head>
+<body>
+<div id="header_opac">
+	<h1 class="header_opac_img">
+    <div class="header_opac_logo">
+    	安徽农业大学图书馆书目检索系统<br>
+        <p>Online Public Access Catalogue</p>
+        
+    </div>
+    </h1>
+    <div class="header_right header_right_top">
+      <p class="header_right_font">       </p>
+      <p style="margin-top:60px;" class="header_right_font">
+        <a href="../opac/book_cart.php">暂存书架(<span id="bookcartCount">0</span>)</a> | <font color="blue">李彬琪</font> <strong><a href="../reader/logout.php" style="color:#ff0000;">注销</a></strong></p>
+       </div>
+</div>
+<div id="menubar">
+    <ul id="menu_top">
+    		  	<li><a href="../opac/search.php" target="_self" >书目检索</a></li>
+	  		  	<li><a href="../top/top_lend.php" target="_self" >热门推荐</a></li>
+	  		  	<li><a href="../browse/cls_browsing.php" target="_self" >分类浏览</a></li>
+	  		  	<li><a href="../newbook/newbook_cls_browse.php" target="_self" >新书通报</a></li>
+	  		  	<li><a href="../peri/peri_nav_e.php" target="_self" >期刊导航</a></li>
+	  		  	<li><a href="../asord/asord_hist.php" target="_self" >读者荐购</a></li>
+	  		  	<li><a href="../shelf/curriculum_browse.php" target="_self" >学科参考</a></li>
+	  		  	<li><a href="../info/info_guide.php" target="_self" >信息发布</a></li>
+	  		  	<li><a class="menu_top_on" style="color:#6C5B23;"	href="../reader/redr_info.php" target="_self" >我的图书馆</a></li>
+	  		  	         <div class="clear"></div>
+    </ul>
+</div>
+<div id="submenu">
+	        <div class="clear"></div>
+</div>
+
+		
+
+
+<div id="mainbox">
+   <div id="container">
+  <div id="navsidebar">
+     <ul id="nav_mylib">
+     	<li><a href="redr_info.php" >我的首页</a></li><li id="nav_mylibhome"><a href="redr_info_rule.php" >证件信息</a></li><li><a href="book_lst.php" >当前借阅</a></li><li><a href="book_hist.php" >借阅历史</a></li><li><a href="asord_lst.php" >荐购历史</a></li><li><a href="preg.php" >预约信息</a></li><li><a href="relegate.php" >委托信息</a></li><li><a href="book_shelf.php" >我的书架</a></li><li><a href="book_loss.php" >书刊遗失</a></li><li><a href="redr_lost.php" >读者挂失</a></li><li><a href="account.php" >帐目清单</a></li><li><a href="fine_pec.php" >违章缴款</a></li><li><a href="book_rv.php" >我的书评</a></li><li><a href="search_hist.php" >检索历史</a></li><li><a href="reader_curriculum.php" >我的课程</a></li><li><a href="credit_detail.php" >我的积分</a></li>
+     </ul>
+  </div>
+  
+  <div id="mylib_content">
+  	<h2>证件信息</h2><br /><br />
+	<div class="mylib_msg">
+		<a href="book_lst.php">五天内即将过期图书[<strong style="color:#F00;">0</strong>]</a>，<a href="book_lst.php">已超期图书[<strong style="color:#F00;">0</strong>]</a>，<a href="preg.php">预约到书[<strong style="color:#F00;">0</strong>]</a>， <a href="relegate.php">委托到书[<strong style="color:#F00;">0</strong>]</a>
+     	<br /><br /> 
+     	最近两个月您一共有<a href="asord_lst.php">【0】条荐购</a>，图书馆已处理了【0】条 ，点击<a href="../asord/asord_redr.php" class="btn btn-success" style="color:#fff;">继续荐购</a>	</div>
+    <div id="mylib_info" >
+	<table width="100%" border="0" cellpadding="5" cellspacing="1" style="padding:8px">
+				  <TR >
+					<TD rowspan="6" >
+			        <span style="padding-left:20px;"><img src="../tpl/images/libimg.png" border="0" /></span><br />
+						
+			        </TD>
+						<TD><span class="bluetext">姓名：</span>李彬琪</TD>
+						<TD><span class="bluetext">证件号： </span>15103751</TD>
+						<TD ><span class="bluetext">条码号：</span>15103751</TD>
+				  </TR>
+			      <TR >
+						<TD ><span class="bluetext">失效日期：</span>2019-07-15</TD>
+						<TD ><span class="bluetext">办证日期：</span>2015-09-02</TD>
+	                  	<TD ><span class="bluetext">生效日期：</span>2015-09-02</TD>
+				  </TR>
+                  <TR>
+	                  <TD ><span class="bluetext">最大可借图书：</span>5</TD>
+	                  <TD ><span class="bluetext">最大可预约图书：</span>1</TD>
+	                  <TD><span class="bluetext">最大可委托图书：</span>0</TD>
+                  </TR>
+                  <TR>
+	                  <TD ><span class="bluetext">读者类型：</span>本科生</TD>
+	                  <TD ><span class="bluetext">借阅等级：</span>01</TD>
+	                  <TD><span class="bluetext">累计借书：</span>14册次</TD>
+                  </TR>
+			      <TR>
+			      		<TD ><span class="bluetext">违章次数：</span>0</TD>
+			      		<TD ><span class="bluetext">欠款金额：</span>0</TD>
+						<TD ><span class="bluetext">系别：</span>园艺学院</TD>
+				  </TR>
+			      <TR >		
+						<TD colspan="2"><span class="bluetext">Email：</span>
+	                  	
+	                  	</TD>
+	                  	<TD colspan="2"><span class="bluetext">身份证号： </span>350722199611164627</TD>	
+				  </TR>
+                  <TR>
+	                   <TD ><span class="bluetext">工作单位：</span>15园艺-2</TD>
+	                   <TD ><span class="bluetext">职业/职称：</span>园艺 本科</TD>
+	                   <TD ><span class="bluetext">职位：</span></TD>
+	                   	<TD ><span class="bluetext">性别：</span>女</TD>
+                  </TR>
+                  <TR>
+	                  <TD ><span class="bluetext">住址：</span></TD>
+	                  <TD ><span class="bluetext">邮编：</span></TD>
+	                  <TD ><span class="bluetext">电话：</span></TD>
+	                  <TD ><span class="bluetext">手机：</span>
+	                  	                  		
+	                  	                  </TD>
+	              </tr>
+	              <tr>
+						<TD ><span class="bluetext">出生日期：</span>1996-11-16</TD>
+						<TD ><span class="bluetext">文化程度：</span></TD>
+	                  <TD ><span class="bluetext">押金：</span>0元</TD>
+	                  <TD ><span class="bluetext">手续费：</span>0元</TD>
+                  </TR>
+	</table>
+    </div>
+	<h2><span id="ruleSpan" title="点击展开详细规则信息" onclick="toggle()" style="height:66px;cursor:hand;">适用的借阅规则<img src="../tpl/images/arrow_down.gif" /></span></h2>
+    <table id="rule" width="100%" border="0" cellpadding="5" cellspacing="1" bgcolor="#CCCCCC" class="table_line">
+		<tr>
+        <td width="125" class="greytext">规则名称</td>
+        <td width="123" class="greytext">适用馆藏地</td>
+        <td width="106" align="left" class="greytext">图书流通类型</td>
+        <td width="78" align="center" class="greytext">最大借阅册数</td>
+        <td width="31" align="center" class="greytext">借期</td>
+        <td width="43" align="center" class="greytext">预约</td>
+        <td width="43" align="center" class="greytext">续借</td>
+        <td width="54" class="greytext"></td>
+      </tr>
+				<tr>
+			<td class="whitetext" width="125">5册60天</td>
+		  <td align="left" class="whitetext" width="123">所有馆藏地!</td>
+		  <td align="left" class="whitetext" width="106">所有流通类型</td>
+		  <td align="center" class="whitetext" width="78">5</td>
+		  <td align="center" class="whitetext" width="31">60</td>
+		  <td align="center" class="whitetext" width="43">不允许</td>
+		  <td align="center" class="whitetext" width="43">允许</td>
+			<td align="center" class="whitetext" width="43"> <a class="blue" href="redr_rule_form.php?rule_no=0000000001">查看借阅规则</a></td>
+		</tr>
+				<tr>
+			<td class="whitetext" width="125">kendl电子书</td>
+		  <td align="left" class="whitetext" width="123">六楼电子阅览室</td>
+		  <td align="left" class="whitetext" width="106">所有流通类型</td>
+		  <td align="center" class="whitetext" width="78">1</td>
+		  <td align="center" class="whitetext" width="31">10</td>
+		  <td align="center" class="whitetext" width="43">允许</td>
+		  <td align="center" class="whitetext" width="43">不允许</td>
+			<td align="center" class="whitetext" width="43"> <a class="blue" href="redr_rule_form.php?rule_no=0000000005">查看借阅规则</a></td>
+		</tr>
+		    </table>
+  </div>
+  <div class="clear"></div>
+</div>
+<script type="text/javascript">
+<!--
+$("#rule").hide();
+function toggle(){ 
+	$("#rule").toggle();
+}
+-->
+</script><div id="footer"><div id="copy"><p> 安徽农业大学图书馆&nbsp;&nbsp; OPAC v5.5.15.08.27  &nbsp;&nbsp;</p><p>&copy; 1999-2015 <a target="_blank" href="http://www.libsys.com.cn">Jiangsu Huiwen Software Ltd. 江苏汇文软件有限公司</a></p></div></div></body></html>
+
+#######################    PresentContent    #####################
+
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <title>安徽农业大学图书馆v5.5书目检索系统 </title>
+<link type="text/css" rel="stylesheet" href="../tpl/css/style.css">
+<link type="text/css" rel="stylesheet" href="../tpl/css/mylib.css" />
+<link type="text/css" rel="stylesheet" href="../tpl/css/ui-lightness/jquery-ui-1.8.13.custom.css">
+<link type="text/css" rel="stylesheet" href="../tpl/css/font-awesome.css">
+<link type="text/css" rel="stylesheet" href="../tpl/css/bootstrap.css">
+<link type="text/css" rel="stylesheet" href="../tpl/css/reader-info.css">
+<script  type="text/javascript" src="../tpl/js/jquery.1.7.1.min.js"></script>
+<script  type="text/javascript" src="../tpl/js/jquery-ui-1.8.13.custom.min.js"></script>
+<script  type="text/javascript" src="../tpl/js/highlighter.js"></script>
+
+<script type="text/javascript" src="../tpl/js/raphael.2.1.0.min.js"></script>
+<script type="text/javascript" src="../tpl/js/justgage.js"></script>
+
+</head>
+<body>
+<div id="header_opac">
+	<h1 class="header_opac_img">
+    <div class="header_opac_logo">
+    	安徽农业大学图书馆书目检索系统<br>
+        <p>Online Public Access Catalogue</p>
+        
+    </div>
+    </h1>
+    <div class="header_right header_right_top">
+      <p class="header_right_font">       </p>
+      <p style="margin-top:60px;" class="header_right_font">
+        <a href="../opac/book_cart.php">暂存书架(<span id="bookcartCount">0</span>)</a> | <font color="blue">李彬琪</font> <strong><a href="../reader/logout.php" style="color:#ff0000;">注销</a></strong></p>
+       </div>
+</div>
+<div id="menubar">
+    <ul id="menu_top">
+    		  	<li><a href="../opac/search.php" target="_self" >书目检索</a></li>
+	  		  	<li><a href="../top/top_lend.php" target="_self" >热门推荐</a></li>
+	  		  	<li><a href="../browse/cls_browsing.php" target="_self" >分类浏览</a></li>
+	  		  	<li><a href="../newbook/newbook_cls_browse.php" target="_self" >新书通报</a></li>
+	  		  	<li><a href="../peri/peri_nav_e.php" target="_self" >期刊导航</a></li>
+	  		  	<li><a href="../asord/asord_hist.php" target="_self" >读者荐购</a></li>
+	  		  	<li><a href="../shelf/curriculum_browse.php" target="_self" >学科参考</a></li>
+	  		  	<li><a href="../info/info_guide.php" target="_self" >信息发布</a></li>
+	  		  	<li><a class="menu_top_on" style="color:#6C5B23;"	href="../reader/redr_info.php" target="_self" >我的图书馆</a></li>
+	  		  	         <div class="clear"></div>
+    </ul>
+</div>
+<div id="submenu">
+	        <div class="clear"></div>
+</div>
+
+		<script language="JavaScript" type="text/javascript">
+	$(function(){
+		$( "#dialog:ui-dialog" ).dialog( "destroy" );
+	});
+</script>
+
+<div id="mainbox">
+   <div id="container">
+  <div id="navsidebar">
+     <ul id="nav_mylib">
+     	<li><a href="redr_info.php" >我的首页</a></li><li><a href="redr_info_rule.php" >证件信息</a></li><li id="nav_mylibhome"><a href="book_lst.php" >当前借阅</a></li><li><a href="book_hist.php" >借阅历史</a></li><li><a href="asord_lst.php" >荐购历史</a></li><li><a href="preg.php" >预约信息</a></li><li><a href="relegate.php" >委托信息</a></li><li><a href="book_shelf.php" >我的书架</a></li><li><a href="book_loss.php" >书刊遗失</a></li><li><a href="redr_lost.php" >读者挂失</a></li><li><a href="account.php" >帐目清单</a></li><li><a href="fine_pec.php" >违章缴款</a></li><li><a href="book_rv.php" >我的书评</a></li><li><a href="search_hist.php" >检索历史</a></li><li><a href="reader_curriculum.php" >我的课程</a></li><li><a href="credit_detail.php" >我的积分</a></li>
+     </ul>
+  </div>
+  
+  <div id="mylib_content" >
+        <div class="alert">
+          <strong></strong>
+        </div>
+  		<p style="text-align:center; font-size:14px; color:#F00;"></p>
+  		<h2>当前借阅</h2>
+       <p style="margin:10px auto;">&nbsp;&nbsp;当前借阅( <b class="blue"></b> ) / 最大借阅( <b class="blue"></b> ) </p>
+       
+ 		<div class="mylib_con_con pan_top" style="text-align:center;">
+ 			<span><img src="../tpl/images/icon_err.jpg" /></span>
+ 			<strong class="iconerr">您的该项记录为空！</strong>
+ 		</div>
+  </div>
+  <div id="dialog-form" title="续借验证码" style="display:none;">
+	   <table width="95%" border="0" cellpadding="3" cellspacing="1">
+		      <tr>
+	            <td align="right">验证码： </td>
+	            <td align="left"><input id="captcha" class="input" name="captcha" type="text" size="20" style="width:150px" >
+	            </td>
+	          </tr>          
+	          <tr>
+	            <td align="right"></td>
+	            <td align="left">请输入下面显示的内容<br/><img id="img" src="captcha.php" /></td>
+	          </tr> 
+	 </table>
+</div>
+
+  <div class="clear"></div>
+</div>
+
+<script type="text/javascript">
+<!--
+function getInLib(barcode,check,num){ 
+		$( "#dialog-form" ).dialog({
+			autoOpen: false,
+			modal: true,
+			buttons: {
+	        "确定": function() {
+	          $(this).dialog("close");
+	          $("#" + num).load('ajax_renew.php?bar_code=' + barcode + "&check=" + check + "&captcha=" + $("#captcha").val() + "&time=" + new Date().getTime());
+	        }
+	      } 
+		});
+		$("#dialog-form").dialog("open");
+		
+}
+-->
+</script>
+<div id="footer"><div id="copy"><p> 安徽农业大学图书馆&nbsp;&nbsp; OPAC v5.5.15.08.27  &nbsp;&nbsp;</p><p>&copy; 1999-2015 <a target="_blank" href="http://www.libsys.com.cn">Jiangsu Huiwen Software Ltd. 江苏汇文软件有限公司</a></p></div></div></body></html>

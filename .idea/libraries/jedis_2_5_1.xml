@@ -1,0 +1,12 @@
+<component name="libraryTable">
+  <library name="jedis-2.5.1">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/lib/jedis-2.5.1.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/logback-core-0.9.28.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/pinyin4j-2.5.0.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/slf4j-api-1.6.4.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

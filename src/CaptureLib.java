@@ -34,7 +34,7 @@ public class CaptureLib {
     // private static CloseableHttpClient httpClient = HttpClients.createDefault();
     static int actiCount = 0;
     static int totalCount = 0;
-    static int countToIgnor = 214;
+    static int countToIgnor = 3950;
     // static int countToIgnor = 0;
     static int passwdChange = 0;
     static final int TIMEOUT_MILLIS = 8000;
@@ -85,10 +85,11 @@ public class CaptureLib {
                 System.out.println("跳过第" + totalCount + "个");
                 continue;
             }
+
             System.out.println("这是第" + totalCount + "个");
 
-//             stuId = "14104503";
-//             stuName = "张潇雅";
+             // stuId = "13100501";
+             // stuName = "刘宏达";
 
             stuName = entry.getKey();
             stuId = entry.getValue();
@@ -185,7 +186,6 @@ public class CaptureLib {
             HttpGet logout = new HttpGet("http://opac.ahau.edu.cn/reader/logout.php");
             logout.setHeader("Rerferer", "http://opac.ahau.edu.cn/reader/redr_info.php");
             CloseableHttpResponse response  = httpClient.execute(logout);
-            HttpEntity entity = response.getEntity();
 
         } catch (ConnectionPoolTimeoutException e) {
             System.out.println("获取用户" + stuName + "(学号" + stuId + ")数据超时，获取下一个用户的数据...");
@@ -254,7 +254,7 @@ public class CaptureLib {
     }
 
     public static void saveAsFile(String userCode, HashMap<String, String> map) throws IOException {
-        File writeTarget = new File("ResultData//" + userCode + ".txt");
+        File writeTarget = new File("ResultData//" + "进程1" + "+" +  totalCount + "+" + userCode + ".txt");
         BufferedWriter out = new BufferedWriter(new FileWriter(writeTarget));
         HashMap<String, String> result = map;
         String contentType = null;
@@ -273,7 +273,7 @@ public class CaptureLib {
     }
 
     public static void saveAsFile(String userCode, HashMap<String, String> map, int actiCount) throws IOException {
-        File writeTarget = new File("ResultData//" + userCode + ".txt");
+        File writeTarget = new File("ResultData//" + "进程1" + "+" +  totalCount + "+" + userCode + ".txt");
         BufferedWriter out = new BufferedWriter(new FileWriter(writeTarget));
         String pre = "\n\n##########    At the time of  " + actiCount + " that being active   ################\n\n";
         out.append(pre);

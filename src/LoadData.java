@@ -17,7 +17,8 @@ public class LoadData {
         ArrayList stuList = new ArrayList();
         try {
             String line;
-            String pathname = "数据//15级可以报四级.txt";
+            String pathname = "数据//2013级全体学生.txt";
+            System.out.println("读取的文件是《" + pathname + "》");
             File file = new File(pathname);
             Scanner scanner = new Scanner(file);
             String[] namePair = {};

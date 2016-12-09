@@ -92,6 +92,7 @@ public class TestParse {
             i++;
             bookId = book.get(1).text();
             bookTitle = book.get(2).text().split("/")[0];
+            // 是否可以改为select("a[href]")
             bookUri = book.get(2).childNode(0).attr("href");
             bookUri = bookUri.substring(2, bookUri.length());
             bookUrl = baseUri + bookUri;
@@ -100,6 +101,7 @@ public class TestParse {
             isbn = moreBookInfo.get("isbn");
             whereNum = moreBookInfo.get("whereNum");
             bookType = moreBookInfo.get("bookType");
+
             authorName = book.get(3).text();
             storeArea = book.get(6).text();
 
@@ -167,6 +169,7 @@ public class TestParse {
             elements = document.getElementsByClass("booklist");
             String bookType = null;
             String whereNum = null;
+            String isbn = null;
             for (Element element : elements) {
                 Elements elements1 = element.getElementsContainingText("学科主题");
                 Elements elements3 = element.getElementsContainingText("个人名称主题");
@@ -179,8 +182,12 @@ public class TestParse {
                 if (elements2.size() > 0) {
                     whereNum = elements2.get(0).text().split(":")[1];
                 }
+
+                Elements elements4 = element.getElementsContainingText("isbn");
+                if (elements4.size() > 0) {
+                    isbn = elements4.get(0).text().split(":")[1];
+                }
             }
-            String isbn = elements.get(2).text().split(":")[1].trim();
             moreBookInfo.put("isbn", isbn);
             moreBookInfo.put("bookType", bookType);
             moreBookInfo.put("whereNum", whereNum);
@@ -197,7 +204,7 @@ public class TestParse {
         Document document = Jsoup.parse(content);
         Elements blueText = document.getElementsByClass("bluetext");
 
-        String id = blueText.get(1).parent().childNode(1).toString();
+        String stuId = blueText.get(1).parent().childNode(1).toString();
         String name = blueText.get(0).parent().childNode(1).toString();
         ;
         // 读者类型，本科生或者研究生
@@ -216,12 +223,12 @@ public class TestParse {
         String major = blueText.get(18).parent().childNode(1).toString();
         String sex = blueText.get(20).parent().childNode(1).toString();
         String phoneNum = blueText.get(24).parent().childNode(1).toString();
-        String sqlInsert = "INSERT IGNORE INTO student(id, name, sex, type, department, major, phone_num, total_borrow) " +
+        String sqlInsert = "INSERT IGNORE INTO student(stu_id, name, sex, type, department, major, phone_num, total_borrow) " +
                 "VALUES(?, ?, ?, ?, ?, ?, ?, ?)";
         PreparedStatement preparedStmt = null;
         try {
             preparedStmt = conn.prepareStatement(sqlInsert);
-            preparedStmt.setString(1, id);
+            preparedStmt.setString(1, stuId);
             preparedStmt.setString(2, name);
             preparedStmt.setString(3, sex);
             preparedStmt.setString(4, type);

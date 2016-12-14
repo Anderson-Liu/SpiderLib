@@ -103,6 +103,6 @@ public class Book {
 
     @Override
     public String toString() {
-        return bookTitle + "," + bookAuthor + "," + bookType + ",queryTimes:" + queryTimes;
+        return "《" + bookTitle + "》," + bookAuthor + "," + bookType + ",queryTimes:" + queryTimes;
     }
 }

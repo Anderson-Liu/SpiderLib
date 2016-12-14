@@ -58,6 +58,11 @@ public class RecommendBook {
                     while (top3Stu.next()){
                         countStu++;
                         String top3StuId = top3Stu.getString("stu_id");
+                        if (Objects.equals(stuId, top3StuId)) {
+                            // 如果前三名里面有自己，跳过
+                            System.out.println("在前三名中发现自己，跳过...");
+                            continue;
+                        }
                         System.out.println("第" + countStu + "个top3学生为： " +  top3StuId);
                         String getRecmdBooks = "select * from all_books where marc_no in" +
                                 "(select marc_num from book_marc_id where book_id in" +

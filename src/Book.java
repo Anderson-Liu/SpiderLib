@@ -100,4 +100,9 @@ public class Book {
     public void setFrequency(int frequency) {
         this.frequency = frequency;
     }
+
+    @Override
+    public String toString() {
+        return bookTitle + "," + bookAuthor + "," + bookType + ",queryTimes:" + queryTimes;
+    }
 }

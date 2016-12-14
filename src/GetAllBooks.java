@@ -35,18 +35,6 @@ public class GetAllBooks {
             + "user=root&password=anderson&useUnicode=true&characterEncoding=UTF8";
     static Connection conn;
 
-    static int connCount = 0;
-
-    static {
-        try {
-            Class.forName("com.mysql.jdbc.Driver");// 动态加载mysql驱动
-            conn = DriverManager.getConnection(url);
-            conn.setAutoCommit(false);
-        } catch (ClassNotFoundException | SQLException e) {
-            e.printStackTrace();
-        }
-    }
-
     static PreparedStatement insertAllStmt, insertRelationStmt;
 
     static String insertAllSql = "insert IGNORE into all_books(marc_no, book_title, book_author, book_type, book_publisher, book_isbn, store_area, where_num, queryTimes)" +
@@ -54,30 +42,49 @@ public class GetAllBooks {
     static String insertRelationSql = "insert IGNORE into book_marc_id(book_id, marc_num, is_borrowable) VALUES(?, ?, ?)";
 
     public static void main(String args[]){
+
+        try {
+            Class.forName("com.mysql.jdbc.Driver");// 动态加载mysql驱动
+            conn = DriverManager.getConnection(url);
+            conn.setAutoCommit(false);
+        } catch (ClassNotFoundException | SQLException e) {
+            e.printStackTrace();
+        }
+
         String url_10 = "http://opac.ahau.edu.cn/opac/item.php?marc_no=000000000";
         String url_100 = "http://opac.ahau.edu.cn/opac/item.php?marc_no=00000000";
         String url_1000 = "http://opac.ahau.edu.cn/opac/item.php?marc_no=0000000";
         String url_10000 = "http://opac.ahau.edu.cn/opac/item.php?marc_no=000000";
         String url_100000 = "http://opac.ahau.edu.cn/opac/item.php?marc_no=00000";
-        String url_257301 = "http://opac.ahau.edu.cn/opac/item.php?marc_no=0000";
+        String url_4_0 = "http://opac.ahau.edu.cn/opac/item.php?marc_no=0000";
+
 
         int count_10 = 10;
         int count_100 = 100;
         int count_1000 = 1000;
         int count_10000 = 10000;
         int count_100000 = 100000;
-        int count_257301 = 257302;
+        int count_180000 = 180000;
+        int count_200000 = 200000;
+        int count_220000 = 220000;
+        int count_175000 = 175000;
+        int count_257302 = 257302;
+
         int totalBookCount = 257301;
+
 
         try {
             insertAllStmt = conn.prepareStatement(insertAllSql);
             PreparedStatement insertRelationStmt = conn.prepareStatement(insertRelationSql);
-            new Thread(new GetAllBooks().new ThreadInsert(count_10, url_10, insertAllStmt, insertRelationStmt)).start();
-            new Thread(new GetAllBooks().new ThreadInsert(count_100, url_100, insertAllStmt, insertRelationStmt)).start();
-            new Thread(new GetAllBooks().new ThreadInsert(count_1000, url_1000, insertAllStmt, insertRelationStmt)).start();
-            new Thread(new GetAllBooks().new ThreadInsert(count_10000, url_10000, insertAllStmt, insertRelationStmt)).start();
-            new Thread(new GetAllBooks().new ThreadInsert(count_100000, url_100000, insertAllStmt, insertRelationStmt)).start();
-            new Thread(new GetAllBooks().new ThreadInsert(count_257301, url_257301, insertAllStmt, insertRelationStmt)).start();
+//            new Thread(new GetAllBooks().new ThreadInsert(count_10, url_10, insertAllStmt, insertRelationStmt)).start();
+//            new Thread(new GetAllBooks().new ThreadInsert(count_100, url_100, insertAllStmt, insertRelationStmt)).start();
+//            new Thread(new GetAllBooks().new ThreadInsert(count_1000, url_1000, insertAllStmt, insertRelationStmt)).start();
+//            new Thread(new GetAllBooks().new ThreadInsert(count_10000, url_10000, insertAllStmt, insertRelationStmt)).start();
+//            new Thread(new GetAllBooks().new ThreadInsert(count_100000, url_100000, insertAllStmt, insertRelationStmt)).start();
+//            new Thread(new GetAllBooks().new ThreadInsert(count_180000, url_4_0, insertAllStmt, insertRelationStmt)).start();
+//            new Thread(new GetAllBooks().new ThreadInsert(count_200000, url_4_0, insertAllStmt, insertRelationStmt)).start();
+//            new Thread(new GetAllBooks().new ThreadInsert(count_220000, url_4_0, insertAllStmt, insertRelationStmt)).start();
+            new Thread(new GetAllBooks().new ThreadInsert(count_257302, url_4_0, insertAllStmt, insertRelationStmt)).start();
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -107,12 +114,26 @@ public class GetAllBooks {
             case 100000:
                 startAcount = 10000;
                 break;
+            case 175000:
+                startAcount = 171459;
+                break;
+            case 180000:
+                startAcount = 175000;
+                break;
+
+            case 200000:
+                startAcount = 192000;
+                break;
+            case 220000:
+                startAcount = 219920;
+                break;
             case 257302:
-                startAcount = 100000;
+                startAcount = 250000;
                 break;
         }
 
 
+        httpClient = HttpClients.createDefault();
         int i;
         for (i=startAcount; i < count; i++) {
             countBooks++;
@@ -173,7 +194,7 @@ public class GetAllBooks {
                 if (isbn.isEmpty()) {
                     System.out.println("找不到isbn号，跳过");
                     continue;
-                }  else if (isbn.length() < 15) {
+                }  else if (isbn.length() < 10) {
                     System.out.println("获取的ISBN号码错误，跳过");
                     continue;
                 } else {

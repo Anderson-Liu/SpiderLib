@@ -154,7 +154,7 @@ public class CalcFrequ {
         final  String LOG_ALL = "";
         Map<String, ResultSet> resultMap3 = getAllStuId();
         log2 = LOG_ALL;
-        String updateSequc3 = "INSERT INTO test_frequency_all(stu_id, stu_name, sex, stu_type, stu_department, stu_major, label_type, label_value) VALUES(?, ?, ?, ?, ?, ?, ?, ?) " +
+        String updateSequc3 = "INSERT INTO frequency_all(stu_id, stu_name, sex, stu_type, stu_department, stu_major, label_type, label_value, book_id) VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?) " +
                 "ON DUPLICATE KEY UPDATE frequency=frequency+1";
         new Thread(new CalcFrequ().new CalcAllThread(log2, updateSequc3, resultMap3)).start();
 
@@ -234,7 +234,7 @@ public class CalcFrequ {
 
     private void calcAllFromSql(String updateSequc, Map<String, ResultSet> resultMap, String log) {
         final int COUNT_TO_IGNORE=0;
-        String bookTitle, bookTypeAll, bookAuthor;
+        String bookTitle, bookTypeAll, bookAuthor, bookId;
         String label, stuId, stuName, department, major, stuType, sex;
         int countStudent = 0;
         ResultSet stuResultSet;
@@ -263,7 +263,7 @@ public class CalcFrequ {
                     }
                     System.out.println(label + ": 获取第" + countStudent + "个学生" + stuId + "的兴趣标签...");
                     // 从mysql获取数据，获取每本书的标题，类型，作者进行分别统计
-                    String query = "SELECT book_title, book_type, book_author FROM books " +
+                    String query = "SELECT book_id, book_title, book_type, book_author FROM books " +
                             "WHERE book_id IN (SELECT book_id FROM student_book WHERE stu_id = ?)";
                     PreparedStatement preparedStmt = conn.prepareStatement(query);
                     preparedStmt.setString(1, stuId);
@@ -275,6 +275,8 @@ public class CalcFrequ {
                     while (resultSet.next()) {
                         countBook++;
                         System.out.println(label + ":获取第" + countStudent + "个学生的第" + countBook + "本书兴趣标签...");
+                        bookId = resultSet.getString("book_id");
+
                         bookTitle = resultSet.getString("book_title");
                         insertStmt.setString(1, stuId);
                         insertStmt.setString(2, stuName);
@@ -284,6 +286,7 @@ public class CalcFrequ {
                         insertStmt.setString(6, major);
                         insertStmt.setString(7, TYPE_TITLE);
                         insertStmt.setString(8, bookTitle);
+                        insertStmt.setString(9, bookId);
 
                         insertStmt.addBatch();
 
@@ -299,6 +302,7 @@ public class CalcFrequ {
                             insertStmt.setString(6, major);
                             insertStmt.setString(7, TYPE_TYPE_DETAIL);
                             insertStmt.setString(8, bookTypeDetail);
+                            insertStmt.setString(9, bookId);
                             insertStmt.addBatch();
                         }
 
@@ -311,6 +315,7 @@ public class CalcFrequ {
                         insertStmt.setString(6, major);
                         insertStmt.setString(7, TYPE_TYPE);
                         insertStmt.setString(8, bookTypeAll);
+                        insertStmt.setString(9, bookId);
                         insertStmt.addBatch();
 
                         bookAuthor = resultSet.getString("book_author");
@@ -322,6 +327,7 @@ public class CalcFrequ {
                         insertStmt.setString(6, major);
                         insertStmt.setString(7, TYPE_AUTHOR);
                         insertStmt.setString(8, bookAuthor);
+                        insertStmt.setString(9, bookId);
                         insertStmt.addBatch();
                     }
                     if (countStudent%500 == 0) {

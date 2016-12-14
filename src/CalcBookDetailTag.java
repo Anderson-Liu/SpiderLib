@@ -87,7 +87,7 @@ public class CalcBookDetailTag {
                     System.out.println("创建新进程...");
                     new Thread(new CalcBookDetailTag().new CommitRunnable(insertStmt, bookCount, conn)).start();
                     conn = getPool();
-                    conn.setAutoCommit(false);
+
                     insertStmt = conn.prepareStatement(insertSql);
                     connCount++;
                 }

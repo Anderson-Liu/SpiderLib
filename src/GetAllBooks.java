@@ -76,14 +76,14 @@ public class GetAllBooks {
         try {
             insertAllStmt = conn.prepareStatement(insertAllSql);
             PreparedStatement insertRelationStmt = conn.prepareStatement(insertRelationSql);
-//            new Thread(new GetAllBooks().new ThreadInsert(count_10, url_10, insertAllStmt, insertRelationStmt)).start();
-//            new Thread(new GetAllBooks().new ThreadInsert(count_100, url_100, insertAllStmt, insertRelationStmt)).start();
-//            new Thread(new GetAllBooks().new ThreadInsert(count_1000, url_1000, insertAllStmt, insertRelationStmt)).start();
-//            new Thread(new GetAllBooks().new ThreadInsert(count_10000, url_10000, insertAllStmt, insertRelationStmt)).start();
-//            new Thread(new GetAllBooks().new ThreadInsert(count_100000, url_100000, insertAllStmt, insertRelationStmt)).start();
-//            new Thread(new GetAllBooks().new ThreadInsert(count_180000, url_4_0, insertAllStmt, insertRelationStmt)).start();
-//            new Thread(new GetAllBooks().new ThreadInsert(count_200000, url_4_0, insertAllStmt, insertRelationStmt)).start();
-//            new Thread(new GetAllBooks().new ThreadInsert(count_220000, url_4_0, insertAllStmt, insertRelationStmt)).start();
+            new Thread(new GetAllBooks().new ThreadInsert(count_10, url_10, insertAllStmt, insertRelationStmt)).start();
+            new Thread(new GetAllBooks().new ThreadInsert(count_100, url_100, insertAllStmt, insertRelationStmt)).start();
+            new Thread(new GetAllBooks().new ThreadInsert(count_1000, url_1000, insertAllStmt, insertRelationStmt)).start();
+            new Thread(new GetAllBooks().new ThreadInsert(count_10000, url_10000, insertAllStmt, insertRelationStmt)).start();
+            new Thread(new GetAllBooks().new ThreadInsert(count_100000, url_100000, insertAllStmt, insertRelationStmt)).start();
+            new Thread(new GetAllBooks().new ThreadInsert(count_180000, url_4_0, insertAllStmt, insertRelationStmt)).start();
+            new Thread(new GetAllBooks().new ThreadInsert(count_200000, url_4_0, insertAllStmt, insertRelationStmt)).start();
+            new Thread(new GetAllBooks().new ThreadInsert(count_220000, url_4_0, insertAllStmt, insertRelationStmt)).start();
             new Thread(new GetAllBooks().new ThreadInsert(count_257302, url_4_0, insertAllStmt, insertRelationStmt)).start();
         } catch (SQLException e) {
             e.printStackTrace();

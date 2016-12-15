@@ -120,7 +120,7 @@ public class TestParse {
                 preparedStmt.setString(7, bookType);
                 int result = preparedStmt.executeUpdate();
 
-                sqlInsert = "INSERT IGNORE INTO student_book(stu_id, book_id, borrow_date, return_date)" +
+                sqlInsert = "INSERT IGNORE INTO borrow_book_record(stu_id, book_id, borrow_date, return_date)" +
                         "VALUES (?, ?, ?, ?)";
                 preparedStmt = conn.prepareStatement(sqlInsert);
                 preparedStmt.setString(1, stuId);
@@ -315,7 +315,7 @@ public class TestParse {
 
                 int result = preparedStmt.executeUpdate();
 
-                sqlInsert = "INSERT IGNORE INTO student_book(stu_id, book_id, borrow_date, return_date)" +
+                sqlInsert = "INSERT IGNORE INTO borrow_book_record(stu_id, book_id, borrow_date, return_date)" +
                         "VALUES (?, ?, ?, ?)";
                 preparedStmt = conn.prepareStatement(sqlInsert);
                 preparedStmt.setString(1, stuID);

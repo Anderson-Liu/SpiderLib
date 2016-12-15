@@ -21,6 +21,20 @@ public class Book {
         this.frequency = frequency;
     }
 
+    public Book(String marcNo, String bookTitle, String  bookAuthor,
+                String bookType, String bookIsbn,
+                String storeArea, String whereNum, int queryTimes, int frequency){
+        this.marcNo = marcNo;
+        this.bookTitle = bookTitle;
+        this.bookAuthor = bookAuthor;
+        this.bookType = bookType;
+        this.bookIsbn = bookIsbn;
+        this.storeArea = storeArea;
+        this.whereNum = whereNum;
+        this.queryTimes = queryTimes;
+        this.frequency = frequency;
+    }
+
     public String getMarcNo() {
         return marcNo;
     }
@@ -101,8 +115,14 @@ public class Book {
         this.frequency = frequency;
     }
 
-    @Override
-    public String toString() {
-        return "《" + bookTitle + "》," + bookAuthor + "," + bookType + ",queryTimes:" + queryTimes;
+
+    public String toString(int toStringType) {
+        switch(toStringType) {
+            case 1:
+                return "《" + bookTitle + "》," + bookAuthor + "," + bookType + ",queryTimes:" + queryTimes;
+            case 2:
+                return "《" + bookTitle + "》," + bookAuthor + "," + bookType + ",frequency:" + frequency;
+        }
+        return "";
     }
 }

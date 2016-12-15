@@ -36,7 +36,7 @@ public class CalcIsbn {
                 while (bookIdResult.next()) {
                     bookCount++;
                     System.out.println("开始统计该ISBN的第" + bookCount + "本书......");
-                    String queryCountById = "select count(book_id) AS borrow_count from student_book where book_id=?";
+                    String queryCountById = "select count(book_id) AS borrow_count from borrow_book_record where book_id=?";
                     bookId = bookIdResult.getString("book_id");
                     PreparedStatement queryCountStatmt = conn.prepareStatement(queryCountById);
                     queryCountStatmt.setString(1, bookId);

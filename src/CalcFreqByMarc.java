@@ -24,7 +24,7 @@ public class CalcFreqByMarc {
 
 
     public void calcFreqncPerMarc(){
-        String queryMarc = "select distinct marc_num from book_marc_id where frequency>0";
+        String queryMarc = "select distinct marc_no from book_marc_id where frequency>0";
         try {
             String updateSql = "update all_books set frequency = ? where marc_no = ?";
             PreparedStatement updateStmt = conn.prepareStatement(updateSql);
@@ -36,8 +36,8 @@ public class CalcFreqByMarc {
             while (marcNums.next()){
                 marcCount++;
                 System.out.println("执行第" + marcCount + "个marcNum...");
-                marcNum = marcNums.getString("marc_num");
-                String calcFreqncy = "select sum(frequency) as total_frequency from book_marc_id where marc_num =?";
+                marcNum = marcNums.getString("marc_no");
+                String calcFreqncy = "select sum(frequency) as total_frequency from book_marc_id where marc_no =?";
                 PreparedStatement calcFreqncyStmt = conn.prepareStatement(calcFreqncy);
                 calcFreqncyStmt.setString(1, marcNum);
                 ResultSet totalFrequencys = calcFreqncyStmt.executeQuery();
@@ -84,7 +84,7 @@ public class CalcFreqByMarc {
                 bookCount++;
                 bookId = bookIds.getString("book_id");
                 System.out.println("开始处理第" + bookCount + "本书:" + bookId);
-                String calcFreqnc = "select count(*) as frequency from student_book where book_id = ?";
+                String calcFreqnc = "select count(*) as frequency from borrow_book_record where book_id = ?";
                 PreparedStatement calcFreqncStmt = conn.prepareStatement(calcFreqnc);
                 calcFreqncStmt.setString(1, bookId);
                 ResultSet freqncPerBook = calcFreqncStmt.executeQuery();

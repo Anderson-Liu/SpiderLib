@@ -18,7 +18,7 @@ public class FixMarcNum {
         }
     }
     public static void main(String args[]) {
-        String getAllSql = "select DISTINCT book_id from test_student_book where marc_num=?";
+        String getAllSql = "select DISTINCT book_id from test_borrow_book_record where marc_no=?";
         String bookId;
         try {
             PreparedStatement getAllStmt = conn.prepareStatement(getAllSql);
@@ -26,7 +26,7 @@ public class FixMarcNum {
             ResultSet allBookIds = getAllStmt.executeQuery();
             int bookCount = 0;
             int marcCount = 0;
-            String updateSql = "update test_student_book set marc_num=? " +
+            String updateSql = "update test_borrow_book_record set marc_no=? " +
                     "where book_id =?";
             System.out.println(updateSql);
             PreparedStatement updateStmt = conn.prepareStatement(updateSql);
@@ -35,12 +35,12 @@ public class FixMarcNum {
                 System.out.println("修复第" + bookCount + "条数据...");
                 bookId = allBookIds.getString("book_id");
 
-                String getMarcSql = "select marc_num from book_marc_id where book_id=?";
+                String getMarcSql = "select marc_no from book_marc_id where book_id=?";
                 PreparedStatement getMarcStmt = conn.prepareStatement(getMarcSql);
                 getMarcStmt.setString(1, bookId);
                 ResultSet marcResult = getMarcStmt.executeQuery();
                 while (marcResult.next()) {
-                    String marcNum = marcResult.getString("marc_num");
+                    String marcNum = marcResult.getString("marc_no");
                     if (marcNum.isEmpty()){
                         System.out.println("找不到MarcNum,跳过...");
                         continue;

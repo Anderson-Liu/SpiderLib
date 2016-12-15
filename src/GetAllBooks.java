@@ -39,7 +39,7 @@ public class GetAllBooks {
 
     static String insertAllSql = "insert IGNORE into test_all_books(marc_no, book_title, book_author, book_type, book_publisher, book_isbn, store_area, where_num, queryTimes)" +
             "values(?, ?, ?, ?, ?, ?, ?, ?, ?)";
-    static String insertRelationSql = "insert IGNORE into test_book_marc_id(book_id, marc_num, is_borrowable) VALUES(?, ?, ?)";
+    static String insertRelationSql = "insert IGNORE into test_book_marc_id(book_id, marc_no, is_borrowable) VALUES(?, ?, ?)";
 
     public static void main(String args[]){
 

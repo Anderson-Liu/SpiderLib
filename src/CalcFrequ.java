@@ -181,7 +181,7 @@ public class CalcFrequ {
             System.out.println("获取第"+ countStudent + "个学生的兴趣标签...");
             // 从mysql获取数据
             String query = "SELECT book_title, book_type, book_author FROM books " +
-                    "WHERE book_id IN (SELECT book_id FROM student_book WHERE stu_id = ?)";
+                    "WHERE book_id IN (SELECT book_id FROM borrow_book_record WHERE stu_id = ?)";
 
             PreparedStatement preparedStmt = null;
 
@@ -264,7 +264,7 @@ public class CalcFrequ {
                     System.out.println(label + ": 获取第" + countStudent + "个学生" + stuId + "的兴趣标签...");
                     // 从mysql获取数据，获取每本书的标题，类型，作者进行分别统计
                     String query = "SELECT book_id, book_title, book_type, book_author FROM books " +
-                            "WHERE book_id IN (SELECT book_id FROM student_book WHERE stu_id = ?)";
+                            "WHERE book_id IN (SELECT book_id FROM borrow_book_record WHERE stu_id = ?)";
                     PreparedStatement preparedStmt = conn.prepareStatement(query);
                     preparedStmt.setString(1, stuId);
                     ResultSet resultSet = preparedStmt.executeQuery();
@@ -376,7 +376,7 @@ public class CalcFrequ {
                     System.out.println(label + ": 获取第" + countStudent + "个学生" + stuId + "的兴趣标签...");
                     // 从mysql获取数据，获取每本书的标题，类型，作者进行分别统计
                     String query = "SELECT book_title, book_type, book_author FROM books " +
-                            "WHERE book_id IN (SELECT book_id FROM student_book WHERE stu_id = ?)";
+                            "WHERE book_id IN (SELECT book_id FROM borrow_book_record WHERE stu_id = ?)";
                     PreparedStatement preparedStmt = null;
                     preparedStmt = conn.prepareStatement(query);
                     preparedStmt.setString(1, stuId);

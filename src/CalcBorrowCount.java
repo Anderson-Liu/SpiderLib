@@ -27,7 +27,7 @@ public class CalcBorrowCount {
         //    ResultSet resultSet = preparedStmt.executeQuery();
         //    String stuId;
         //    int i=0;
-        //    String updateSql = "update student set total_borrow=(select count(book_id) from student_book where stu_id = ?) where stu_id=?";
+        //    String updateSql = "update student set total_borrow=(select count(book_id) from borrow_book_record where stu_id = ?) where stu_id=?";
         //    while (resultSet.next()) {
         //        i++;
         //       System.out.println("修正第" + i + "个学生的借阅总数...");
@@ -48,7 +48,7 @@ public class CalcBorrowCount {
             ResultSet resultSet = preparedStmt.executeQuery();
             String bookId;
             int j=0;
-            String updateSql = "update books set borrowed_count=(select count(book_id) from student_book where book_id = ?) where book_id=?";
+            String updateSql = "update books set borrowed_count=(select count(book_id) from borrow_book_record where book_id = ?) where book_id=?";
             while (resultSet.next()) {
                 j++;
                 if (j < 90103) {

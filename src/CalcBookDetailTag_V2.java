@@ -30,7 +30,7 @@ public class CalcBookDetailTag_V2 {
             String marcNo, bookTitle, bookAuthor, storeArea, isbn, whereNum, bookType, bookTypeDetail;
             int frequency, queryTimes;
             String[] detailTypes;
-            String insertSql = "insert IGNORE into frequency_marc_books_detail_type(marc_no, book_title, book_author, store_area, isbn, where_num, book_detail_type, query_times, frequency)" +
+            String insertSql = "insert IGNORE into all_books_detail_type(marc_no, book_title, book_author, store_area, isbn, where_num, book_detail_type, query_times, frequency)" +
                     "values(?, ?, ?, ?, ?, ?, ?, ?, ?)";
             conn.setAutoCommit(false);
             PreparedStatement insertStmt = conn.prepareStatement(insertSql);

@@ -57,6 +57,30 @@ public class CalcFrequ {
         }
     }
 
+    public static Map<String, ResultSet> getStuIdFromComputerDepart() {
+        System.out.println("执行对计算机学院的兴趣分析.......");
+
+        PreparedStatement preparedStatement;
+        ResultSet departResultSet;
+        String department = null;
+
+        HashMap<String, ResultSet> resultMap = new HashMap<>();
+        try {
+
+            String queryIdSql = "SELECT stu_id FROM student WHERE department like ?";
+            preparedStatement = conn.prepareStatement(queryIdSql);
+            department = "%计算机%";
+            preparedStatement.setString(1, department);
+            ResultSet idResultSet = preparedStatement.executeQuery();
+            resultMap.put(department, idResultSet);
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+
+        }
+        return resultMap;
+    }
+
     public static Map<String, ResultSet> getStuIdFromDepart() {
         System.out.println("执行分别对各个学院人群 的兴趣分析.......");
         String queryDepartSql = "SELECT DISTINCT department FROM student";
@@ -135,12 +159,12 @@ public class CalcFrequ {
 
         final String LOG_DEPARTMENT_1 = "本次采集的学院是";
         final String LOG_DEPARTMENT_2 = "本批次学院";
-        // Map<String, ResultSet> resultMap1 = getStuIdFromDepart();
+        Map<String, ResultSet> resultMap1 = getStuIdFromDepart();
         log1 = LOG_DEPARTMENT_1;
         log2 = LOG_DEPARTMENT_2;
         String updateSequc1 = "INSERT INTO test_frequency_department(type, name, department) VALUES(?, ?, ?) " +
                 "ON DUPLICATE KEY UPDATE frequency=frequency+1";
-        // new Thread(new CalcFrequ().new CalcByDepartThread(log1, log2, updateSequc1, resultMap1)).start();
+        new Thread(new CalcFrequ().new CalcByDepartThread(log1, log2, updateSequc1, resultMap1)).start();
 
         final String LOG_GRADE_1 = "本次采集的年级是";
         final  String LOG_GRADE_2 = "本批次年级";
@@ -357,7 +381,6 @@ public class CalcFrequ {
         for (Map.Entry<String, ResultSet> entry : resultMap.entrySet()) {
             label = entry.getKey();
             idResultSet = entry.getValue();
-
             System.out.println(log1 + label);
             try {
 
@@ -377,6 +400,11 @@ public class CalcFrequ {
                     // 从mysql获取数据，获取每本书的标题，类型，作者进行分别统计
                     String query = "SELECT book_title, book_type, book_author FROM books " +
                             "WHERE book_id IN (SELECT book_id FROM borrow_book_record WHERE stu_id = ?)";
+
+//                    String query = "select book_title from all_books where marc_no in" +
+//                            "(select distinct marc_no from book_marc_id where book_id IN " +
+//                            "(SELECT book_id FROM borrow_book_record WHERE stu_id = ?))";
+
                     PreparedStatement preparedStmt = null;
                     preparedStmt = conn.prepareStatement(query);
                     preparedStmt.setString(1, stuId);

@@ -273,7 +273,7 @@ public class RecommendBook {
             for (Map.Entry<Book, Integer> entry : bookFreqncyMap.entrySet()) {
                 Book book = entry.getKey();
                 matchIndex = entry.getValue();
-                System.out.println(book.toString(toStringType) + " 标签匹配程度与借阅重合度的融合指数为:" + matchIndex );
+                System.out.println(book.toString(toStringType) + " 借阅热度:" + matchIndex );
                 allRecmndBooks.put(book, matchIndex);
             }
             System.out.println("Debug");

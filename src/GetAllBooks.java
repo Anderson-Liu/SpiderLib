@@ -83,21 +83,21 @@ public class GetAllBooks {
         try {
             insertAllStmt = conn.prepareStatement(insertAllSql);
             PreparedStatement insertRelationStmt = conn.prepareStatement(insertRelationSql);
-            new Thread(new GetAllBooks().new ThreadInsert(target_10, url_9_0, insertAllStmt, insertRelationStmt)).start();
-            new Thread(new GetAllBooks().new ThreadInsert(target_100, url_8_0, insertAllStmt, insertRelationStmt)).start();
-            new Thread(new GetAllBooks().new ThreadInsert(target_1000, url_7_0, insertAllStmt, insertRelationStmt)).start();
-            new Thread(new GetAllBooks().new ThreadInsert(target_10000, url_6_0, insertAllStmt, insertRelationStmt)).start();
-            new Thread(new GetAllBooks().new ThreadInsert(target_30000, url_5_0, insertAllStmt, insertRelationStmt)).start();
-            new Thread(new GetAllBooks().new ThreadInsert(target_50000, url_5_0, insertAllStmt, insertRelationStmt)).start();
-            new Thread(new GetAllBooks().new ThreadInsert(target_70000, url_5_0, insertAllStmt, insertRelationStmt)).start();
-            new Thread(new GetAllBooks().new ThreadInsert(target_90000, url_5_0, insertAllStmt, insertRelationStmt)).start();
-            new Thread(new GetAllBooks().new ThreadInsert(target_100000, url_5_0, insertAllStmt, insertRelationStmt)).start();
-            new Thread(new GetAllBooks().new ThreadInsert(target_120000, url_4_0, insertAllStmt, insertRelationStmt)).start();
-            new Thread(new GetAllBooks().new ThreadInsert(target_140000, url_4_0, insertAllStmt, insertRelationStmt)).start();
-            new Thread(new GetAllBooks().new ThreadInsert(target_160000, url_4_0, insertAllStmt, insertRelationStmt)).start();
-            new Thread(new GetAllBooks().new ThreadInsert(target_180000, url_4_0, insertAllStmt, insertRelationStmt)).start();
-            new Thread(new GetAllBooks().new ThreadInsert(target_200000, url_4_0, insertAllStmt, insertRelationStmt)).start();
-            new Thread(new GetAllBooks().new ThreadInsert(target_220000, url_4_0, insertAllStmt, insertRelationStmt)).start();
+//            new Thread(new GetAllBooks().new ThreadInsert(target_10, url_9_0, insertAllStmt, insertRelationStmt)).start();
+//            new Thread(new GetAllBooks().new ThreadInsert(target_100, url_8_0, insertAllStmt, insertRelationStmt)).start();
+//            new Thread(new GetAllBooks().new ThreadInsert(target_1000, url_7_0, insertAllStmt, insertRelationStmt)).start();
+//            new Thread(new GetAllBooks().new ThreadInsert(target_10000, url_6_0, insertAllStmt, insertRelationStmt)).start();
+//            new Thread(new GetAllBooks().new ThreadInsert(target_30000, url_5_0, insertAllStmt, insertRelationStmt)).start();
+//            new Thread(new GetAllBooks().new ThreadInsert(target_50000, url_5_0, insertAllStmt, insertRelationStmt)).start();
+//            new Thread(new GetAllBooks().new ThreadInsert(target_70000, url_5_0, insertAllStmt, insertRelationStmt)).start();
+//            new Thread(new GetAllBooks().new ThreadInsert(target_90000, url_5_0, insertAllStmt, insertRelationStmt)).start();
+//            new Thread(new GetAllBooks().new ThreadInsert(target_100000, url_5_0, insertAllStmt, insertRelationStmt)).start();
+//            new Thread(new GetAllBooks().new ThreadInsert(target_120000, url_4_0, insertAllStmt, insertRelationStmt)).start();
+//            new Thread(new GetAllBooks().new ThreadInsert(target_140000, url_4_0, insertAllStmt, insertRelationStmt)).start();
+//            new Thread(new GetAllBooks().new ThreadInsert(target_160000, url_4_0, insertAllStmt, insertRelationStmt)).start();
+//            new Thread(new GetAllBooks().new ThreadInsert(target_180000, url_4_0, insertAllStmt, insertRelationStmt)).start();
+//            new Thread(new GetAllBooks().new ThreadInsert(target_200000, url_4_0, insertAllStmt, insertRelationStmt)).start();
+//            new Thread(new GetAllBooks().new ThreadInsert(target_220000, url_4_0, insertAllStmt, insertRelationStmt)).start();
             new Thread(new GetAllBooks().new ThreadInsert(target_240000, url_4_0, insertAllStmt, insertRelationStmt)).start();
             new Thread(new GetAllBooks().new ThreadInsert(target_257302, url_4_0, insertAllStmt, insertRelationStmt)).start();
         } catch (SQLException e) {
@@ -160,7 +160,7 @@ public class GetAllBooks {
                 startAcount = 200000;
                 break;
             case 240000:
-                startAcount = 220000;
+                startAcount = 232996;
                 break;
             case 257302:
                 startAcount = 240000;
@@ -178,6 +178,8 @@ public class GetAllBooks {
             queryUrl = queryPrefix + i;
             HttpGet queryGet = new HttpGet(queryUrl);
             queryGet.setConfig(requestConfig);
+            queryGet.addHeader("User-Agent", "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/57.0.2987.110 Safari/537.36");
+            queryGet.addHeader("Referer", "http://opac.ahau.edu.cn/");
             try {
                 CloseableHttpResponse queryResponse = httpClient.execute(queryGet);
                 HttpEntity queryEntity = queryResponse.getEntity();

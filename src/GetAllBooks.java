@@ -21,6 +21,7 @@ import java.util.Map;
 
 /**
  * Created by anderson on 2016/12/13.
+ * 抓取所有的书籍数据
  */
 public class GetAllBooks {
 

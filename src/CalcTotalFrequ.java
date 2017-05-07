@@ -2,6 +2,7 @@ import java.sql.*;
 
 /**
  * Created by anderson on 2016/12/10.
+ * 计算所有书籍的 1.书名， 2. 作者， 3. 类别
  * 有待后续改造成多线程模式
  */
 public class CalcTotalFrequ {

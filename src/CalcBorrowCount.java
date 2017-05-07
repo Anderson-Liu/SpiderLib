@@ -2,6 +2,8 @@ import java.sql.*;
 
 /**
  * Created by anderson on 2016/12/9.
+ * 通过书籍ID计算每本书籍的累计被借阅次数
+ *
  */
 public class CalcBorrowCount {
 

@@ -1,5 +1,6 @@
 /**
  * Created by Enn on 2016/3/19.
+ * 验证码自动识别
  */
 
 import org.apache.http.HttpEntity;

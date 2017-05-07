@@ -2,6 +2,7 @@ import java.sql.*;
 
 /**
  * Created by anderson on 2016/12/14.
+ * 修正book_id与marc_no对应重复的问题
  */
 public class FixMarcNum {
     static String url = "jdbc:mysql://localhost:3306/ahaulib?"

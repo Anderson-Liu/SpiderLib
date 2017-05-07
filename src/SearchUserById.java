@@ -18,6 +18,7 @@ import java.net.URISyntaxException;
 
 /**
  * Created by anderson on 2016/12/16.
+ * 通过用户id获取其他信息
  */
 public class SearchUserById {
     static DefaultHttpClient httpClient = new DefaultHttpClient();

@@ -2,8 +2,9 @@ import java.sql.*;
 
 /**
  * Created by anderson on 2016/12/14.
+ * 通过marc_no计算被借阅的频次
  */
-public class CalcFreqByMarc {
+public class CalcFreqByMarc{
 
     static String url = "jdbc:mysql://localhost:3306/ahaulib?"
             + "user=root&password=anderson&useUnicode=true&characterEncoding=UTF8";

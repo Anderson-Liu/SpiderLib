@@ -4,6 +4,7 @@ import java.sql.*;
 
 /**
  * Created by anderson on 2016/12/15.
+ * 计算每种详细书籍类别的被借阅频次
  */
 public class CalcFreqByDetailType {
 

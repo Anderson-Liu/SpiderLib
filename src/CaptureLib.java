@@ -28,6 +28,7 @@ import java.util.Map;
 
 /**
  * Created by Enn on 2016/3/19.
+ * 自动识别验证码，抓取图书馆信息
  */
 public class CaptureLib {
 

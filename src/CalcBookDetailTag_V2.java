@@ -4,6 +4,7 @@ import java.util.Vector;
 /**
  * Created by anderson on 2016/12/13.
  * Calculate book detail tag by marcNo
+ * 计算书籍详细类别标签
  */
 
 public class CalcBookDetailTag_V2 {

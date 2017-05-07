@@ -2,6 +2,7 @@ import java.sql.*;
 
 /**
  * Created by anderson on 2016/12/10.
+ * 计算每个ISBN号对应的被借阅数量
  */
 public class CalcIsbn {
     static String url = "jdbc:mysql://localhost:3306/ahaulib?"

@@ -9,6 +9,7 @@ import java.util.Scanner;
 
 /**
  * Created by Enn on 2016/3/20.
+ * 读取源数据
  */
 public class LoadData {
     public static Map<String, String> getStuList() {

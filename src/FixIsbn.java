@@ -22,6 +22,7 @@ import java.util.List;
 
 /**
  * Created by anderson on 2016/12/9.
+ * 重新抓取数据，修正book_id 与isbn对应错误的问题
  */
 public class FixIsbn {
 

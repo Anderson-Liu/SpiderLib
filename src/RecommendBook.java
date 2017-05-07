@@ -6,6 +6,7 @@ import java.util.*;
 
 /**
  * Created by anderson on 2016/12/14.
+ * 推荐算法
  */
 // TODO: 看过这本书的人，还看了什么？ 对这群人进行目标人物兴趣匹配
 public class RecommendBook {

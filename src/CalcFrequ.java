@@ -5,6 +5,7 @@ import java.util.Vector;
 
 /**
  * Created by anderson on 2016/12/9.
+ * 执行对各种人群的爱好分析
  */
 public class CalcFrequ {
 

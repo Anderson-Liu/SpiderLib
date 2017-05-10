@@ -9,7 +9,7 @@ import java.sql.*;
 
 // todo: 增加作者/类别标签
 public class CalcBorrowPerStu {
-    static String url = "jdbc:mysql://192.168.199.157:3306/ahaulib?"
+    static String url = "jdbc:mysql://0.0.0.0:3306/ahaulib?"
             + "user=root&password=anderson&useUnicode=true&characterEncoding=UTF8";
     static Connection conn;
 
@@ -34,9 +34,9 @@ public class CalcBorrowPerStu {
             String queryRecordSql = "select * from borrow_book_record";
             PreparedStatement queryRecordStmt = conn.prepareStatement(queryRecordSql);
             ResultSet recordResult = queryRecordStmt.executeQuery();
-            String stu_id, marcNo = null, bookTitle = null, book_id, borrow_date, return_date, name = null, sex = null, type = null, department = null, major = null;
-            String insertSql = "insert into student_borrow_record(stu_id, name, sex, type, department, major, book_id, marcNo, book_title, borrow_date, return_date) " +
-                    "values(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) ON DUPLICATE KEY UPDATE frequency=frequency+1";
+            String author = null, stu_id, marcNo = null, bookTitle = null, book_id, borrow_date, return_date, name = null, sex = null, type = null, department = null, major = null;
+            String insertSql = "insert into student_borrow_record(stu_id, name, sex, type, department, major, book_id, marc_no, book_title, author, borrow_date, return_date) " +
+                    "values(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) ON DUPLICATE KEY UPDATE frequency=frequency+1";
             PreparedStatement insertStmt = conn.prepareStatement(insertSql);
             while (recordResult.next()) {
                 bookCount++;
@@ -71,6 +71,8 @@ public class CalcBorrowPerStu {
                 if (bookResult.next()) {
                     marcNo = bookResult.getString("marc_no");
                     bookTitle = bookResult.getString("book_title");
+                    author = bookResult.getString("author");
+
                 }
 
                 insertStmt.setString(1, stu_id);
@@ -82,8 +84,9 @@ public class CalcBorrowPerStu {
                 insertStmt.setString(7, book_id);
                 insertStmt.setString(8, marcNo);
                 insertStmt.setString(9, bookTitle);
-                insertStmt.setString(10, borrow_date);
-                insertStmt.setString(11, return_date);
+                insertStmt.setString(10, author);
+                insertStmt.setString(11, borrow_date);
+                insertStmt.setString(12, return_date);
                 insertStmt.addBatch();
                 if (bookCount%20000 == 0) {
                     System.out.println("执行插入数据...");

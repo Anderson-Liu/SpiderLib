@@ -1,0 +1,32 @@
+<component name="libraryTable">
+  <library name="assertj-core-1.5.0">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/lib/webmagic/assertj-core-1.5.0.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/webmagic/commons-codec-1.9.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/webmagic/commons-collections-3.2.1.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/webmagic/commons-io-1.3.2.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/webmagic/commons-lang3-3.1.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/webmagic/commons-lang-2.6.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/webmagic/commons-logging-1.2.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/webmagic/commons-pool2-2.4.2.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/webmagic/fastjson-1.2.21.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/webmagic/hamcrest-core-1.3.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/webmagic/httpclient-4.5.2.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/webmagic/httpcore-4.4.4.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/webmagic/jedis-2.9.0.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/webmagic/json-path-0.8.1.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/webmagic/json-smart-1.1.1.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/webmagic/jsoup-1.8.3.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/webmagic/junit-4.11.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/webmagic/log4j-1.2.17.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/webmagic/mahout-core-0.9.0.2.1.7.0-784.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/webmagic/slf4j-api-1.7.6.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/webmagic/slf4j-log4j12-1.7.6.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/webmagic/webmagic-core-0.6.1.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/webmagic/webmagic-extension-0.6.1.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/webmagic/xsoup-0.3.1.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

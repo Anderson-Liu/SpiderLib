@@ -1,5 +1,6 @@
 /**
  * Created by anderson on 2016/12/15.
+ * 书籍的类,Model类
  */
 public class Book {
     private String marcNo;
